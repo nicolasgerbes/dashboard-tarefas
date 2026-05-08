@@ -3,6 +3,11 @@ const NS = "http://www.w3.org/2000/svg"
 
 const addButtons = document.querySelectorAll(".add-card-btn")
 
+
+/* 
+  Salva todas as tarefas no localStorage.
+  Cada tarefa guarda título, descrição e a coluna onde está localizada.
+*/
 function saveTasks() {
   const tasks = []
 
@@ -24,6 +29,10 @@ function saveTasks() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks))
 }
 
+/* 
+  Cria o ícone de lixeira usado em cada card.
+  Ao clicar no ícone, a tarefa é removida e o localStorage é atualizado.
+*/
 function createTrashIcon(task) {
   const iconTrashSvg = document.createElementNS(NS, "svg")
   const iconTrashPath = document.createElementNS(NS, "path")
@@ -53,6 +62,11 @@ function createTrashIcon(task) {
   return iconTrashSvg
 }
 
+/* 
+  Cria um novo card de tarefa.
+  O card possui título editável, descrição editável, botão de excluir
+  e suporte para drag and drop.
+*/
 function createTask(targetList, title = "", description = "", shouldSave = true) {
   const task = document.createElement("div")
   task.classList.add("tasks")
@@ -93,6 +107,10 @@ function createTask(targetList, title = "", description = "", shouldSave = true)
     saveTasks()
   })
 
+    /*
+    Configura o início do arrasto do card.
+    Um clone temporário é criado para melhorar a visualização durante o drag.
+  */
   task.addEventListener("dragstart", function (event) {
     const dragPreview = task.cloneNode(true)
     const taskRect = task.getBoundingClientRect()
@@ -133,6 +151,11 @@ function createTask(targetList, title = "", description = "", shouldSave = true)
   }
 }
 
+
+/* 
+  Carrega as tarefas salvas no localStorage.
+  Cada tarefa é recriada na mesma coluna onde estava antes.
+*/  
 function loadTasks() {
   const savedTasks = JSON.parse(localStorage.getItem(STORAGE_KEY)) || []
 
@@ -145,7 +168,9 @@ function loadTasks() {
   })
 }
 
-
+/* 
+  Mantém o campo vazio para que o Placeholder apareça.
+*/
 function resetPlaceholderIfEmpty(element) {
   if (element.textContent.trim() === "") {
     element.textContent = ""
@@ -153,6 +178,10 @@ function resetPlaceholderIfEmpty(element) {
 }
 
 
+/* 
+  Adiciona uma nova tarefa na coluna correspondente
+  quando o botão de adicionar card é clicado.
+*/
 addButtons.forEach(function (button) {
   button.addEventListener("click", function () {
     const column = button.closest(".task-column")
@@ -163,6 +192,10 @@ addButtons.forEach(function (button) {
 })
 const taskColumns = document.querySelectorAll(".task-column")
 
+/* 
+  Configura o drag and drop das colunas.
+  Permite mover tarefas entre colunas e também reorganizar a posição dos cards.
+*/
 taskColumns.forEach(function (column) {
   column.addEventListener("dragover", function (event) {
     event.preventDefault()

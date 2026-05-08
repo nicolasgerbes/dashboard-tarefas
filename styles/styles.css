@@ -1,7 +1,7 @@
-*{
-    padding: 0;
-    margin: 0;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 body,
@@ -16,26 +16,33 @@ div {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-body{
-    background-image: url("../assets/img/background.jpg");
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-    background-size: cover;
+body {
+  min-height: 100vh;
+  background-image: url("../assets/img/background.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
 }
+
+/* Board principal */
 
 .board {
   width: min(1200px, 95%);
   margin: 40px auto;
   display: flex;
+  flex-wrap: wrap;
   gap: 24px;
   align-items: flex-start;
   justify-content: center;
 }
 
+/* Colunas */
+
 .task-column {
-  width: 320px;
-  min-height: auto;
+  width: 100%;
+  max-width: 320px;
+  flex: 1 1 300px;
   background: rgba(37, 37, 37, 0.85);
   border-radius: 12px;
   padding: 16px;
@@ -44,26 +51,33 @@ body{
   gap: 14px;
 }
 
+.column-header {
+  position: relative;
+  padding-right: 48px;
+}
+
 .column-header h2 {
   color: #fff;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 20px;
 }
 
+/* Lista de cards */
+
 .cards-list {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  min-height: auto;
 }
+
+/* Cards */
 
 .tasks {
   position: relative;
   background: #343434;
-  color: #0f172a;
+  color: #fff;
   border-radius: 8px;
-  padding: 16px;
-  min-height: auto;
+  padding: 16px 36px 16px 16px;
   cursor: pointer;
 }
 
@@ -80,22 +94,26 @@ body{
   color: #fff;
 }
 
-.content-tasks {
-  max-height: auto;
-  overflow-y: auto;
-  padding-top: 10px;
+.tasks h3 {
+  font-size: 17px;
 }
 
+.content-tasks {
+  overflow-y: auto;
+  padding-top: 10px;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+/* Botão de adicionar card */
 
 .add-card-btn {
   border: none;
   background: transparent;
   color: #d1d5db;
-
   text-align: left;
   font-size: 16px;
   cursor: pointer;
-
   padding: 10px;
   border-radius: 8px;
 }
@@ -104,39 +122,29 @@ body{
   background: rgba(255, 255, 255, 0.08);
 }
 
+/* Ícones */
+
+.icon-plus {
+  height: 38px;
+  width: 38px;
+  color: #ffffff;
+  cursor: pointer;
+  position: absolute;
+  top: -8px;
+  right: 0;
+}
+
 .icon-trash {
   height: 20px;
   width: 20px;
-  color: #000;
+  color: #161616;
   cursor: pointer;
-
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 8px;
+  right: 8px;
 }
 
-.icon-plus{
-    height: 50px;
-    width: 50px;
-    color: #ffffff;
-    cursor: pointer;
-    position: absolute;
-    top: 0;
-    right: 0;
-    
-}
-
-
-.icon-trash{
-    height: 20px;
-    width: 20px;
-    color: #161616;
-    cursor: pointer;
-    position: absolute;
-    top: 0;
-    right: 0;
-    
-}
+/* Drag and drop */
 
 .drag-preview {
   position: absolute;
@@ -151,15 +159,91 @@ body{
   opacity: 0.45;
 }
 
+/* Texto editável */
+
 .editable-text:empty::before {
-    content: attr(data-placeholder);
-    color: #9d9898;
-    font-style: Georgia;
-    pointer-events: none;
+  content: attr(data-placeholder);
+  color: #9d9898;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  pointer-events: none;
 }
 
 .editable-text:focus {
   outline: none;
   border: none;
   box-shadow: none;
-} 
+}
+
+/* Responsividade para tablets */
+
+@media (max-width: 900px) {
+  .board {
+    width: 95%;
+    gap: 18px;
+  }
+
+  .task-column {
+    max-width: 100%;
+    flex: 1 1 280px;
+  }
+}
+
+/* Responsividade para celulares */
+
+@media (max-width: 600px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .board {
+    width: 92%;
+    margin: 24px auto;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  .task-column {
+    width: 100%;
+    max-width: none;
+    padding: 14px;
+  }
+
+  .column-header {
+    padding-right: 42px;
+  }
+
+  .column-header h2 {
+    font-size: 18px;
+  }
+
+  .tasks {
+    padding: 14px 34px 14px 14px;
+  }
+
+  .tasks h3 {
+    font-size: 16px;
+  }
+
+  .content-tasks {
+    font-size: 14px;
+  }
+
+  .add-card-btn {
+    font-size: 15px;
+    padding: 8px;
+  }
+
+  .icon-plus {
+    width: 34px;
+    height: 34px;
+    top: -6px;
+  }
+
+  .icon-trash {
+    width: 18px;
+    height: 18px;
+    top: 8px;
+    right: 8px;
+  }
+}

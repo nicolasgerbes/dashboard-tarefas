@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de tarefas</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    
+<body>
+
+    <main class="board">
+    <section class="task-column" data-list="todo">
+        <div class="column-header">
+        <h2>Tarefas para fazer</h2>
+        </div>
+
+        <div id="todo-tasks" class="cards-list"></div>
+
+        <button class="add-card-btn">+ Adicionar card</button>
+    </section>
+
+    <section class="task-column" data-list="done">
+        <div class="column-header">
+        <h2>Tarefas concluídas</h2>
+        </div>
+
+        <div id="done-tasks" class="cards-list"></div>
+
+        <button class="add-card-btn">+ Adicionar card</button>
+    </section>
+
+    <section class="task-column" data-list="done">
+        <div class="column-header">
+        <h2>Tarefas pendentes</h2>
+        </div>
+
+        <div id="done-tasks" class="cards-list"></div>
+
+        <button class="add-card-btn">+ Adicionar card</button>
+    </section>
+    </main>
+    
+    <script src="/scripts/scripts.js"></script>
+
+
+</body>
+</html>
